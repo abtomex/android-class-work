@@ -7,8 +7,9 @@ import dom.dima.learn.classworksprint_15.data.network.RetrofitNetworkClient
 import dom.dima.learn.classworksprint_15.domain.api.MoviesInteractor
 import dom.dima.learn.classworksprint_15.domain.api.MoviesRepository
 import dom.dima.learn.classworksprint_15.domain.impl.MoviesInteractorImpl
-import dom.dima.learn.classworksprint_15.presentation.MoviesSearchController
+import dom.dima.learn.classworksprint_15.presentation.movies.MoviesSearchPresenter
 import dom.dima.learn.classworksprint_15.presentation.PosterController
+import dom.dima.learn.classworksprint_15.presentation.movies.MoviesView
 import dom.dima.learn.classworksprint_15.ui.movies.MoviesAdapter
 
 object Creator {
@@ -20,8 +21,16 @@ object Creator {
         return MoviesInteractorImpl(getMoviesRepository(context))
     }
 
-    fun provideMoviesSearchController(activity: Activity, adapter: MoviesAdapter): MoviesSearchController {
-        return MoviesSearchController(activity, adapter)
+    fun provideMoviesSearchPresenter(
+        moviesView: MoviesView,
+        context: Context,
+        adapter: MoviesAdapter
+    ): MoviesSearchPresenter {
+        return MoviesSearchPresenter(
+            view = moviesView,
+            context = context,
+            adapter = adapter
+        )
     }
 
     fun providePosterController(activity: Activity): PosterController {
